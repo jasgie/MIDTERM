@@ -41,7 +41,7 @@
         <form id="assessmentForm" class="space-y-4">
             <div class="flex flex-col space-y-2">
                 <label for="fullname" class="text-gray-700 font-bold">Full name:</label>
-                <input type="text" id="fullname" name="fullname" placeholder="Enter your Lastname, Firstname M." class="border border-blue-800 rounded px-4 py-2 w-full" required>
+                <input type="text" id="fullname" name="fullname" placeholder="Enter your Lastname, Firstname" class="border border-blue-800 rounded px-4 py-2 w-full" required>
             </div>
             <div class="flex flex-col space-y-2">
                 <label for="email" class="text-gray-700 font-bold">Email:</label>
@@ -94,7 +94,7 @@
             const emailPattern = /^[a-zA-Z0-9._%+-]+@hccci\.edu\.ph$/;
 
             if (!fullnamePattern.test(fullname)) {
-                alert("Full name format is incorrect. Please use: Lastname, Firstname M.");
+                alert("Full name format is incorrect. Please use: Lastname, Firstname");
                 return;
             }
 
