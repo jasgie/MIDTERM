@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midterm Assessment Submission</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Roboto', sans-serif; }
+        /* Add styles for loading animation */
+        .loader {
+            display: none;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-white flex flex-col items-center justify-center min-h-screen px-4">
+    <div class="text-center">
+        <h1 class="text-blue-800 text-lg font-bold">CC102 | COMPUTER PROGRAMMING 1</h1>
+        <h2 class="text-blue-800 text-3xl font-bold mt-2">MIDTERM MAJOR ASSESSMENT</h2>
+    </div>
+    <div class="mt-8 w-full max-w-md">
+        <form id="assessmentForm" class="space-y-4">
+            <div class="flex flex-col space-y-2">
+                <label for="fullname" class="text-gray-700 font-bold">Full name:</label>
+                <input type="text" id="fullname" name="fullname" placeholder="Enter your Lastname, Firstname M." class="border border-blue-800 rounded px-4 py-2 w-full" required>
+            </div>
+            <div class="flex flex-col space-y-2">
+                <label for="email" class="text-gray-700 font-bold">Email:</label>
+                <input type="email" id="email" name="email" placeholder="email@hccci.edu.ph" class="border border-blue-800 rounded px-4 py-2 w-full" required>
+            </div>
+            <button type="button" onclick="submitAssessment()" class="bg-blue-800 text-white font-bold py-2 px-8 rounded w-full relative">
+                SUBMIT
+                <div class="loader absolute right-4 top-1/2 transform -translate-y-1/2"></div>
+            </button>
+        </form>
+    </div>
+    
+    <script>
+        const problems = [
+            "Sum of Two Integers - Write a program that prompts the user to enter two integers and then outputs their sum.",
+            "Product of Two Numbers - Write a program that prompts the user to enter two floating-point numbers and outputs their product.",
+            "Area of a Circle - Write a program that calculates and displays the area of a circle after the user inputs the radius. Use the formula: Area = π * radius^2.",
+            "Average of Three Numbers - Write a program that asks the user to input three integers and calculates their average.",
+            "Even or Odd - Write a program that prompts the user to enter an integer and determines whether the number is even or odd.",
+            "Maximum of Two Numbers - Write a program that prompts the user to enter two numbers and prints which one is greater.",
+            "Simple Interest Calculation - Write a program that calculates the simple interest based on the principal amount, rate of interest, and time in years entered by the user. Use the formula: Simple Interest = (Principal * Rate * Time) / 100.",
+            "Celsius to Fahrenheit Conversion - Write a program that converts a temperature from Celsius to Fahrenheit. Use the formula: Fahrenheit = (Celsius * 9/5) + 32.",
+            "Positive, Negative, or Zero - Write a program that prompts the user to enter a number and then outputs whether the number is positive, negative, or zero.",
+            "Remainder of Division - Write a program that asks the user to input two integers and outputs the remainder when the first is divided by the second.",
+            "Total Price Including Tax - Write a program that calculates the total price of an item including tax. The program should prompt the user to input the price of the item and the tax rate.",
+            "Swap Two Numbers - Write a program that swaps two numbers entered by the user without using a third variable."
+        ];
+
+        let isSubmitted = false;
+
+        function submitAssessment() {
+            if (isSubmitted) {
+                alert("You have already submitted. Only one attempt is allowed.");
+                return;
+            }
+
+            const fullname = document.getElementById("fullname").value;
+            const email = document.getElementById("email").value;
+
+            // Custom JavaScript validation
+            const fullnamePattern = /^[A-Za-z\s]+, [A-Za-z\s]+ [A-Z]\.$/;
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@hccci\.edu\.ph$/;
+
+            if (!fullnamePattern.test(fullname)) {
+                alert("Full name format is incorrect. Please use: Lastname, Firstname M.");
+                return;
+            }
+
+            if (!emailPattern.test(email)) {
+                alert("Email must be in the format email@hccci.edu.ph.");
+                return;
+            }
+
+            // Show loader
+            const loader = document.querySelector('.loader');
+            loader.style.display = 'block';
+
+            // Generate a random activity number
+            const activityNumber = Math.floor(Math.random() * problems.length) + 1;
+            const problemStatement = problems[activityNumber - 1];
+
+            // Generate PDF
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            doc.text(`Name: ${fullname}`, 10, 10);
+            doc.text("CC102 - Computer Programming 1", 10, 20);
+            doc.text("Midterm Performance Task", 10, 30);
+            doc.text("Deadline: October 30, 2024", 10, 40);
+            doc.text("Instructions:", 10, 50);
+            
+            // Adding text with line breaks to handle text cut-off
+            doc.text("1. Design, implement, and submit the following for each problem:", 10, 60);
+            doc.text("- Flowchart", 20, 70);
+            doc.text("- Pseudocode", 20, 80);
+            doc.text("- Java Code", 20, 90);
+            doc.text("2. All work must be handwritten on 8.5 x 13 in paper.", 10, 100);
+            doc.text("3. Ensure neatness and proper indentation.", 10, 110);
+            doc.text("4. Deadline: October 30, 2024. No late submissions.", 10, 120);
+            doc.text("5. Include your full name and section on each page.", 10, 130);
+            
+            // Adding the problem statement using text wrapping (max width = 180)
+            doc.text(`Problem #${activityNumber}: ${problemStatement}`, 10, 150, { maxWidth: 180 });
+
+            // Convert PDF to Base64
+            const pdfData = doc.output("datauristring").split(',')[1]; // Extract Base64 content
+
+            // Send email with EmailJS
+            emailjs.init("P0ann7PdgzzWdg8QL");
+            emailjs.send("service_tsg1cyc", "template_01azxk4", {
+                name: fullname,
+                to_email: email,
+                activity_number: activityNumber,
+                message: problemStatement,
+                attachment: pdfData,
+                attachment_filename: "Midterm_Assessment.pdf",
+                attachment_mime: "application/pdf"
+            }).then((response) => {
+                alert("Submission successful! Check your email for details.");
+                isSubmitted = true; // Prevent further submissions
+
+                // Download the PDF locally after email is sent successfully
+                doc.save("Midterm_Assessment.pdf");
+            }).catch((error) => {
+                alert("There was an error with your submission. Please try again.");
+                console.log(error);
+            }).finally(() => {
+                // Hide loader after submission attempt
+                loader.style.display = 'none';
+            });
+        }
+    </script>
+</body>
+</html>
