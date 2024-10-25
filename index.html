@@ -28,11 +28,15 @@
         }
     </style>
 </head>
-<body class="bg-white flex flex-col items-center justify-center min-h-screen px-4">
-    <div class="text-center">
+<body class="bg-white flex flex-col items-center justify-between min-h-screen px-4">
+    <div> <br><br><br></div>
+    <header class="text-center py-4">
         <h1 class="text-blue-800 text-lg font-bold">CC102 | COMPUTER PROGRAMMING 1</h1>
         <h2 class="text-blue-800 text-3xl font-bold mt-2">MIDTERM MAJOR ASSESSMENT</h2>
-    </div>
+        
+        <p class="text-red-600 mt-2 font-semibold text-lg">**IMPORTANT**: Access this site to get your activity. Only one submission is allowed per student.</p>
+    </header>
+    <div><p class="text-gray-600 mt-2">Please fill out the form carefully and ensure all details are correct before submitting.</p></div>
     <div class="mt-8 w-full max-w-md">
         <form id="assessmentForm" class="space-y-4">
             <div class="flex flex-col space-y-2">
@@ -50,6 +54,14 @@
         </form>
     </div>
     
+    <footer class="mt-auto py-4">
+        <div class="text-center text-gray-600">
+            <p>2024 CC102 - Computer Programming 1. All rights reserved.</p>
+            <p>Contact: <a href="mailto:jgatdula@hccci.edu.ph" class="text-blue-800">jgatdula@hccci.edu.ph</a></p>
+            <p class="text-gray-600">© Jastine M. Gatdula</p>
+        </div>
+    </footer>
+
     <script>
         const problems = [
             "Sum of Two Integers - Write a program that prompts the user to enter two integers and then outputs their sum.",
@@ -78,7 +90,7 @@
             const email = document.getElementById("email").value;
 
             // Custom JavaScript validation
-            const fullnamePattern = /^[A-Za-z\s]+, [A-Za-z\s]+ [A-Z]\.$/;
+            const fullnamePattern = /^[A-Za-z\s]+, [A-Za-z\s]+$/;
             const emailPattern = /^[a-zA-Z0-9._%+-]+@hccci\.edu\.ph$/;
 
             if (!fullnamePattern.test(fullname)) {
