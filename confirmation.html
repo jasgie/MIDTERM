@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+        }
+        .confirmation-box {
+            text-align: center;
+            padding: 20px;
+        }
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: inline-block;
+            border: 5px solid #4CAF50;
+            position: relative;
+            animation: scaleUp 0.5s ease forwards;
+        }
+        .checkmark::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 20px;
+            height: 40px;
+            border: solid #4CAF50;
+            border-width: 0 5px 5px 0;
+            transform: translate(-50%, -50%) rotate(45deg);
+            opacity: 0;
+            animation: checkmarkStroke 0.9s ease 0.3s forwards;
+        }
+        @keyframes scaleUp {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+        @keyframes checkmarkStroke {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="confirmation-box">
+        <div class="checkmark"></div>
+        <h1>Submission Complete</h1>
+        <p>Your activity and instructions have been sent to your email. The PDF should be downloading now. Please check your email for further instructions.</p>
+   </div>
+</body>
+</html>
